@@ -34,7 +34,7 @@ Were performed tests for various group numbers (k up to 15) and a number of test
 Further, are visualized best cost-wise results for every number of groups. Colours are assigned in order of increasing of the group price coefficient.
 
 #  A JSON ﬁle containing the postcodes, each of which is a list of locations.
-In the last part, results for best experiment for k = 15 are saved into JSON file.
+In the next part, results for best experiment for k = 15 are saved into JSON file.
 # An SQL query that returns the latest transaction at each location.
 For the same experiment is constructed MySQL command which returns the latest transaction from a desired group x.
 Membership in group x is determined analogically to softmax: cost for group x must be smaller than for all other groups.
@@ -43,6 +43,7 @@ It is possible to merge a few groups together which have close price property, d
 
 Minus of k-means is relative difficulty of setting the balance between 2 optimization problems (finding optimal parameters). Secondly, optimization costs increasing in terms of distance from a class centre is not necessarily the best model for the given task. However this approach is simple enough and computing distances is feasible for SQL request.
 
-For comparison we can get a visually better price heat map by computing for each datapoint an average of neighbour price coefficients and visualizing this. However such zones depending on the actual underlying dataset are not as easy to parametrize for further SQL requests.
+In the last part, I computed averaged over neighbours curve values for every datapoint which smoothens differences locally, and repeated the whole clustering process with the same parameters. Regions have crispier borders than before. This variant disregards some effects of factual datapoints but should provide better areal properties. Otherwise, same result may be achieved when tuning geometric clustering to higher weight.
+In any case, depending on what is needed, this may be a better result. (JSON files and SQL requests can be completed in same way.)
 
 Certain values could be normalized and denormalized for computation but this wasn't done for the sake of better visibility of all stages and due to methods used not requiring this for better performance.
